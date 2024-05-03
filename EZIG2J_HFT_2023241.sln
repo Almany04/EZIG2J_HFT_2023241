@@ -21,6 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZIG2J_HFT_2023241.Endpoint
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZIG2J_HFT_2023241.Logic", "EZIG2J_HFT_2023241.Logic\EZIG2J_HFT_2023241.Logic.csproj", "{3C39DC2F-F4B9-4674-B989-A18ADB3A2314}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{4BE10AE1-10B1-4EBB-98F3-89DE16F44343}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
