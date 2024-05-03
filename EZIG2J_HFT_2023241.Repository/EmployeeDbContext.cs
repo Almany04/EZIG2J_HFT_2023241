@@ -4,7 +4,7 @@ using System;
 
 namespace EZIG2J_HFT_2023241.Repository
 {
-    internal class EmployeeDbContext :DbContext
+    public class EmployeeDbContext :DbContext
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
