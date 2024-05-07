@@ -9,4 +9,8 @@
     <ProjectReference Include="..\EZIG2J_HFT_2023241.Repository\EZIG2J_HFT_2023241.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+
 </Project>

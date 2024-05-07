@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace EZIG2J_HFT_2023241.Logic
 {
-    public class DepartmentLogic : IDepartmentLogic
+    public class ProjectAssignmentLogic : IProjectAssignmentLogic
     {
-        IRepository<Department> repo;
+        IRepository<ProjectAssignment> repo;
 
-        public DepartmentLogic(IRepository<Department> repo)
+        public ProjectAssignmentLogic(IRepository<ProjectAssignment> repo)
         {
             this.repo = repo;
         }
 
-        public void Create(Department item)
+        public void Create(ProjectAssignment item)
         {
             this.repo.Create(item);
         }
@@ -29,20 +29,19 @@ namespace EZIG2J_HFT_2023241.Logic
             this.repo.Delete(id);
         }
 
-        public Department Read(int id)
+        public ProjectAssignment Read(int id)
         {
             return this.repo.Read(id);
         }
 
-        public IQueryable<Department> ReadAll()
+        public IQueryable<ProjectAssignment> ReadAll()
         {
             return this.repo.ReadAll();
         }
 
-        public void Update(Department item)
+        public void Update(ProjectAssignment item)
         {
             this.repo.Update(item);
         }
-
     }
 }
