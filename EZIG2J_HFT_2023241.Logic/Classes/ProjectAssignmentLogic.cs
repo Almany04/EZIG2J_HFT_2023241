@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EZIG2J_HFT_2023241.Logic.Classes
+namespace EZIG2J_HFT_2023241.Logic
 {
     public class ProjectAssignmentLogic : IProjectAssignmentLogic
     {
