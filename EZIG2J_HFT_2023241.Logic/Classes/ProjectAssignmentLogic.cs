@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EZIG2J_HFT_2023241.Logic
+namespace EZIG2J_HFT_2023241.Logic.Classes
 {
     public class ProjectAssignmentLogic : IProjectAssignmentLogic
     {
@@ -21,27 +21,27 @@ namespace EZIG2J_HFT_2023241.Logic
 
         public void Create(ProjectAssignment item)
         {
-            this.repo.Create(item);
+            repo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            repo.Delete(id);
         }
 
         public ProjectAssignment Read(int id)
         {
-            return this.repo.Read(id);
+            return repo.Read(id);
         }
 
         public IQueryable<ProjectAssignment> ReadAll()
         {
-            return this.repo.ReadAll();
+            return repo.ReadAll();
         }
 
         public void Update(ProjectAssignment item)
         {
-            this.repo.Update(item);
+            repo.Update(item);
         }
     }
 }

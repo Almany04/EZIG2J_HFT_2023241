@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Channels;
 
-namespace EZIG2J_HFT_2023241.Logic
+namespace EZIG2J_HFT_2023241.Logic.Classes
 {
     public class EmployeeLogic : IEmployeeLogic
     {
@@ -23,17 +23,17 @@ namespace EZIG2J_HFT_2023241.Logic
             {
                 throw new ArgumentException("The Name is too short..");
             }
-            this.repo.Create(item);
+            repo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            repo.Delete(id);
         }
 
         public Employee Read(int id)
         {
-            var employee = this.repo.Read(id);
+            var employee = repo.Read(id);
             if (employee == null)
             {
                 throw new ArgumentException("This employee does not exists");
@@ -44,12 +44,12 @@ namespace EZIG2J_HFT_2023241.Logic
 
         public IQueryable<Employee> ReadAll()
         {
-            return this.repo.ReadAll();
+            return repo.ReadAll();
         }
 
         public void Update(Employee item)
         {
-            this.repo.Update(item);
+            repo.Update(item);
         }
 
         //Non-CRUD metodusok
@@ -58,7 +58,7 @@ namespace EZIG2J_HFT_2023241.Logic
         //Dolgozók száma egy adott Projecten
         public int GetEmployeeCountOnProject(int projectId)
         {
-            return this.repo.ReadAll()
+            return repo.ReadAll()
                        .SelectMany(e => e.ProjectAssignments)
                        .Count(pa => pa.ProjectId == projectId);
         }
@@ -67,7 +67,7 @@ namespace EZIG2J_HFT_2023241.Logic
         //Egy adott projektben részt vevő Department-ek listája
         public List<string> GetDepartmentsInvolvedInProject(int projectId)
         {
-            return this.repo.ReadAll()
+            return repo.ReadAll()
                        .Where(e => e.ProjectAssignments.Any(pa => pa.ProjectId == projectId))
                        .Select(e => e.Department.Name)
                        .Distinct()
@@ -78,7 +78,7 @@ namespace EZIG2J_HFT_2023241.Logic
         //A legrégebben dolgozó alkalmazott neve és munkaköre
         public string GetLongestServingEmployeeDetails()
         {
-            var longestServingEmployee = this.repo.ReadAll().OrderBy(e => e.HireDate).FirstOrDefault();
+            var longestServingEmployee = repo.ReadAll().OrderBy(e => e.HireDate).FirstOrDefault();
             if (longestServingEmployee != null)
             {
                 return $"{longestServingEmployee.Name} - {longestServingEmployee.Department.Name}";
@@ -88,7 +88,7 @@ namespace EZIG2J_HFT_2023241.Logic
         //Dolgozók munkaidőtartamának összesítésére osztályonként
         public IEnumerable<DepartmentWorkHoursInfo> DepartmentWorkHoursStatistics()
         {
-            return from e in this.repo.ReadAll()
+            return from e in repo.ReadAll()
                    group e by e.DepartmentId into g
                    select new DepartmentWorkHoursInfo()
                    {
@@ -108,7 +108,7 @@ namespace EZIG2J_HFT_2023241.Logic
         {
             var result = new Dictionary<string, double>();
 
-            var projects = this.repo.ReadAll().SelectMany(e => e.ProjectAssignments).GroupBy(pa => pa.ProjectId);
+            var projects = repo.ReadAll().SelectMany(e => e.ProjectAssignments).GroupBy(pa => pa.ProjectId);
 
             foreach (var project in projects)
             {
