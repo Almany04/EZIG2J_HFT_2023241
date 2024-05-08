@@ -2,94 +2,63 @@
 using ConsoleTools;
 using EZIG2J_HFT_2023241.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace EZIG2J_HFT_2023241.Client
 {
-    internal class Program
+   internal class Program
     {
-       
+
+        static RestService rest;
         static void Create(string entity)
         {
-            Console.WriteLine(entity + " create");
-            Console.ReadLine();
+            if (entity == "Employee")
+            {
+                Console.Write("Enter Employee Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Employee() { Name = name }, "Employee");
+            }
         }
         static void List(string entity)
         {
             if (entity == "Employee")
             {
-                var items = employeeLogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
+                List<Employee> employees = rest.Get<Employee>("Employee");
+                foreach (var item in employees)
                 {
-                    Console.WriteLine(item.EmployeeId + "\t" + item.Name);
-                }
-            }
-            Console.ReadLine();
-        }
-        static void List1(string entity)
-        {
-            if (entity == "Department")
-            {
-                var items = departmentLogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.DepartmentId + "\t" + item.Name);
-                }
-            }
-            Console.ReadLine();
-        }
-        static void List2(string entity)
-        {
-            if (entity == "ProjectAssignment")
-            {
-                var items = projectassigmentLogic.ReadAll();
-                Console.WriteLine("Id" + "\t");
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.ProjectAssignmentId);
-                }
-            }
-            Console.ReadLine();
-        }
-        static void List3(string entity)
-        {
-            if (entity == "Project")
-            {
-                var items = projectLogic.ReadAll();
-                Console.WriteLine("Id" + "\t" + "Name");
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.ProjectId + "\t" + item.Title);
+                    Console.WriteLine(item.EmployeeId + ": " + item.Name);
                 }
             }
             Console.ReadLine();
         }
         static void Update(string entity)
         {
-            Console.WriteLine(entity + " update");
-            Console.ReadLine();
+            if (entity == "Employee")
+            {
+                Console.Write("Enter Employee's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Employee one = rest.Get<Employee>(id, "Employee");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "Employee");
+            }
         }
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Employee")
+            {
+                Console.Write("Enter Employee's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Employee");
+            }
         }
-
+       
         static void Main(string[] args)
         {
-            var ctx = new EmployeeDbContext();
-
-            var employeeRepo = new EmployeeRepository(ctx);
-            var departRepo = new DepartmentRepository(ctx);
-            var proassiRepo = new ProjectAssignRepository(ctx);
-            var projectRepo = new ProjectRepository(ctx);
-
-            employeeLogic = new EmployeeLogic(employeeRepo);
-            departmentLogic = new DepartmentLogic(departRepo);
-            projectassigmentLogic = new ProjectAssignmentLogic(proassiRepo);
-            projectLogic = new ProjectLogic(projectRepo);
+            rest = new RestService("http://localhost:39574/", "employee");
 
             var employeeSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Employee"))
@@ -99,21 +68,21 @@ namespace EZIG2J_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var departmentSubMenu = new ConsoleMenu(args, level: 1)
-                .Add("List", () => List1("Department"))
+                .Add("List", () => List("Department"))
                 .Add("Create", () => Create("Department"))
                 .Add("Delete", () => Delete("Department"))
                 .Add("Update", () => Update("Department"))
                 .Add("Exit", ConsoleMenu.Close);
 
             var projectassignSubMenu = new ConsoleMenu(args, level: 1)
-                .Add("List", () => List2("ProjectAssignment"))
+                .Add("List", () => List("ProjectAssignment"))
                 .Add("Create", () => Create("ProjectAssignment"))
                 .Add("Delete", () => Delete("ProjectAssignment"))
                 .Add("Update", () => Update("ProjectAssignment"))
                 .Add("Exit", ConsoleMenu.Close);
 
             var projectSubMenu = new ConsoleMenu(args, level: 1)
-                .Add("List", () => List3("Project"))
+                .Add("List", () => List("Project"))
                 .Add("Create", () => Create("Project"))
                 .Add("Delete", () => Delete("Project"))
                 .Add("Update", () => Update("Project"))
