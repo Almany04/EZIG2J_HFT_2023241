@@ -25,6 +25,19 @@ namespace EZIG2J_HFT_2023241.Client
                 string name = Console.ReadLine();
                 rest.Post(new Department() { Name = name }, "Department");
             }
+            else if (entity == "Project")
+            {
+                Console.Write("Enter Project Title: ");
+                string name = Console.ReadLine();
+                rest.Post(new Project() { Title = name }, "Project");
+            }
+            else if (entity == "ProjectAssignment")
+            {
+                Console.Write("Enter ProjectAssignment Id: ");
+                string id = Console.ReadLine();
+                int idvalue = int.Parse(id);
+                rest.Post(new ProjectAssignment() { ProjectAssignmentId = idvalue }, "ProjectAssignment");
+            }
         }
         static void List(string entity)
         {
@@ -43,6 +56,22 @@ namespace EZIG2J_HFT_2023241.Client
                     Console.WriteLine(item.DepartmentId + ": " + item.Name);
                 }
             }
+            else if (entity == "Project")
+            {
+                List<Project> projects = rest.Get<Project>("Project");
+                foreach (var item in projects)
+                {
+                    Console.WriteLine(item.ProjectId + ": " + item.Title);
+                }
+            }
+            else if (entity == "ProjectAssignment")
+            {
+                List<ProjectAssignment> projectAssignments = rest.Get<ProjectAssignment>("ProjectAssignment");
+                foreach (var item in projectAssignments)
+                {
+                    Console.WriteLine(item.ProjectAssignmentId + ": " + item.Project);
+                }
+            }
                 Console.ReadLine();
         }
         static void Update(string entity)
@@ -57,6 +86,36 @@ namespace EZIG2J_HFT_2023241.Client
                 one.Name = name;
                 rest.Put(one, "Employee");
             }
+            else if (entity == "Department")
+            {
+                Console.Write("Enter Department's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Department one = rest.Get<Department>(id, "Department");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "Department");
+            }
+            else if (entity == "Project")
+            {
+                Console.Write("Enter Project's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Project one = rest.Get<Project>(id, "Project");
+                Console.Write($"New name [old: {one.Title}]: ");
+                string name = Console.ReadLine();
+                one.Title = name;
+                rest.Put(one, "Project");
+            }
+            else if (entity == "ProjectAssignment")
+            {
+                Console.Write("Enter ProjectAssignment's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                ProjectAssignment one = rest.Get<ProjectAssignment>(id, "ProjectAssignment");
+                Console.Write($"New name [old: {one.ProjectAssignmentId}]: ");
+                string name = Console.ReadLine();
+                one.ProjectAssignmentId = int.Parse(name);
+                rest.Put(one, "Project");
+            }
         }
         static void Delete(string entity)
         {
@@ -65,6 +124,24 @@ namespace EZIG2J_HFT_2023241.Client
                 Console.Write("Enter Employee's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
                 rest.Delete(id, "Employee");
+            }
+            else if (entity == "Department")
+            {
+                Console.Write("Enter Department's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Department");
+            }
+            else if (entity == "Project")
+            {
+                Console.Write("Enter Project's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "Project");
+            }
+            else if (entity == "ProjectAssignment")
+            {
+                Console.Write("Enter ProjectAssignment's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "ProjectAssignment");
             }
         }
        
