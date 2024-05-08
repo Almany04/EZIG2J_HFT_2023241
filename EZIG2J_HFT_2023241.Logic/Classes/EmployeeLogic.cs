@@ -126,21 +126,16 @@ namespace EZIG2J_HFT_2023241.Logic
             }
         }
 
-        //Az egyes projekteken dolgozók összesített munkaidőtartama
-        public Dictionary<string, double> GetTotalWorkHoursPerProject()
+        //Ez a metódus visszaadja egy adott alkalmazott részlegének a nevét.
+        public string GetDepartmentOfEmployee(int employeeId)
         {
-            var result = new Dictionary<string, double>();
-
-            var projects = repo.ReadAll().SelectMany(e => e.ProjectAssignments).GroupBy(pa => pa.ProjectId);
-
-            foreach (var project in projects)
-            {
-                var totalWorkHours = (project.First().Project.EndDate - project.First().Project.StartDate).TotalHours;
-                result.Add(project.First().Project.Title, totalWorkHours);
-            }
-
-            return result;
+            var employee = repo.Read(employeeId);
+            return employee != null ? employee.Department.Name : "Unknown";
         }
+
+
+
+
 
     }
 }

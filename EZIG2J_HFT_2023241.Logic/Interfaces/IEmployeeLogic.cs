@@ -13,7 +13,7 @@ namespace EZIG2J_HFT_2023241.Logic
         List<string> GetDepartmentsInvolvedInProject(int projectId);
         int GetEmployeeCountOnProject(int projectId);
         string GetLongestServingEmployeeDetails();
-        Dictionary<string, double> GetTotalWorkHoursPerProject();
+        string GetDepartmentOfEmployee(int employeeId);
         Employee Read(int id);
         IQueryable<Employee> ReadAll();
         void Update(Employee item);
