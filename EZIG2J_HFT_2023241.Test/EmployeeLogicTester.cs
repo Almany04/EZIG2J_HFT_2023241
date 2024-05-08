@@ -102,6 +102,32 @@ namespace EZIG2J_HFT_2023241.Test
             Assert.Contains("Department2", departments);
         }
 
+
+        [Test]
+        public void GetLongestServingEmployeeDetailsTest()
+        {
+            // Arrange
+            var employeesNoEmployee = new List<Employee>(); 
+            var employeesValid = new List<Employee>
+    {
+        new Employee { Name = "John Doe", HireDate = DateTime.Parse("2010-01-01"), Department = new Department { Name = "Department1" } },
+        new Employee { Name = "Jane Smith", HireDate = DateTime.Parse("2012-05-05"), Department = new Department { Name = "Department2" } }
+    }; 
+
+            mockEmployeeRepo.SetupSequence(e => e.ReadAll())
+                            .Returns(employeesNoEmployee.AsQueryable())
+                            .Returns(employeesValid.AsQueryable());     
+
+            // Act & Assert
+            
+            Exception exNoEmployee = Assert.Throws<Exception>(() => logic.GetLongestServingEmployeeDetails());
+            Assert.AreEqual("Nincs alkalmazott az adatbázisban.", exNoEmployee.Message);
+
+           
+            string resultValid = logic.GetLongestServingEmployeeDetails();
+            Assert.AreEqual("John Doe - Department1", resultValid);
+        }
+
         [Test]
         public void DepartmentWorkHoursStatisticsTest()
         {
