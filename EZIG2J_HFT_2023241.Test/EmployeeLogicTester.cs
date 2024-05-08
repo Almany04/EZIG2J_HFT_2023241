@@ -185,6 +185,59 @@ namespace EZIG2J_HFT_2023241.Test
             Assert.AreEqual(336, result["Project2"]); // 14 days * 24 hours = 336 hours
         }
 
+        [Test]
+        public void CreateEmployeeTestWithCorrectName()
+        {
+            // Arrange
+            var employee = new Employee() { Name = "John Doe" };
+
+            // Act
+            logic.Create(employee);
+
+            // Assert
+            mockEmployeeRepo.Verify(r => r.Create(employee), Times.Once);
+        }
+
+        [Test]
+        public void CreateEmployeeTestWithEmptyName()
+        {
+            // Arrange
+            var employee = new Employee() { Name = "" };
+
+            try
+            {
+                // Act
+                logic.Create(employee);
+            }
+            catch
+            {
+                // Expected exception
+            }
+
+            // Assert
+            mockEmployeeRepo.Verify(r => r.Create(employee), Times.Never);
+        }
+
+        [Test]
+        public void CreateEmployeeTestWithNullName()
+        {
+            // Arrange
+            var employee = new Employee() { Name = null };
+
+            try
+            {
+                // Act
+                logic.Create(employee);
+            }
+            catch
+            {
+                // Expected exception
+            }
+
+            // Assert
+            mockEmployeeRepo.Verify(r => r.Create(employee), Times.Never);
+        }
+
     }
 }
 

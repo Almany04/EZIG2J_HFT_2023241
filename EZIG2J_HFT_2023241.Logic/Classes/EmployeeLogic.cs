@@ -22,7 +22,14 @@ namespace EZIG2J_HFT_2023241.Logic
             if (item.Name.Length < 3)
             {
                 throw new ArgumentException("The Name is too short..");
+            }else if (item.Name == null)
+            {
+                throw new ArgumentException("The Name is null...");
+            }else if(item.Name == "")
+            {
+                throw new ArgumentException("The Name is empty...");
             }
+            
             repo.Create(item);
         }
 
