@@ -3,55 +3,54 @@ using EZIG2J_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-
-
 namespace EZIG2J_HFT_2023241.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
 
-        IEmployeeLogic logic;
+        IDepartmentLogic logic;
 
-        public EmployeeController(IEmployeeLogic logic)
+        public DepartmentController(IDepartmentLogic logic)
         {
             this.logic = logic;
         }
 
-       
+
         [HttpGet]
-        public IEnumerable<Employee> ReadAll()
+        public IEnumerable<Department> ReadAll()
         {
             return this.logic.ReadAll();
         }
 
-       
+
         [HttpGet("{id}")]
-        public Employee Read(int id)
+        public Department Read(int id)
         {
             return this.logic.Read(id);
         }
 
-        
+
         [HttpPost]
-        public void Create([FromBody] Employee value)
+        public void Create([FromBody] Department value)
         {
             this.logic.Create(value);
         }
 
-        
+
         [HttpPut]
-        public void Update([FromBody] Employee value)
+        public void Update([FromBody] Department value)
         {
             this.logic.Update(value);
         }
 
-        
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             this.logic.Delete(id);
         }
-    }
+    
+}
 }
