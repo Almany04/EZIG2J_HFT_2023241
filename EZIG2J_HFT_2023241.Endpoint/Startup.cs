@@ -33,6 +33,7 @@ namespace EZIG2J_HFT_2023241.Endpoint
             services.AddTransient<IDepartmentLogic, DepartmentLogic>();
             services.AddTransient<IProjectAssignmentLogic, ProjectAssignmentLogic>();
             services.AddTransient<IProjectLogic, ProjectLogic>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
