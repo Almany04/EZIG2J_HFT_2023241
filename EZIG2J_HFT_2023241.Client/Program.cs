@@ -144,12 +144,54 @@ namespace EZIG2J_HFT_2023241.Client
                 rest.Delete(id, "ProjectAssignment");
             }
         }
-       
+
+      static void GetEmployeeCountOnProject()
+        {
+            var barmi = rest.GetSingle<object>("Stat/GetEmployeeCountOnProject?projectId=2");
+            Console.WriteLine(barmi);
+            Console.ReadLine();
+        }
+
+      static void GetDepartmentsInvolvedInProject()
+        {
+            var barmi = rest.Get<object>("Stat/GetDepartmentsInvolvedInProject?projectId=2");
+            foreach (var item in barmi)
+            {
+                Console.WriteLine(item);
+            }
+            
+            Console.ReadLine();
+        }
+      static void GetLongestServingEmployeeDetails()
+        {
+            var barmi = rest.GetSingle<object>("Stat/GetLongestServingEmployeeDetails");
+            Console.WriteLine(barmi);
+            Console.ReadLine();
+        }
+
+      static void DepartmentWorkHoursStatistics()
+        {
+            var barmi = rest.Get<object>("Stat/DepartmentWorkHoursStatistics");
+
+            foreach (var item in barmi)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+
+      static void GetDepartmentOfEmployee()
+        {
+            var barmi = rest.GetSingle<object>("Stat/GetDepartmentOfEmployee?employeeId=2");
+            Console.WriteLine(barmi);
+            Console.ReadLine();
+        }
+
 
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:39574/", "employee");
-
+            
             var employeeSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Employee"))
                 .Add("Create", () => Create("Employee"))
@@ -177,13 +219,20 @@ namespace EZIG2J_HFT_2023241.Client
                 .Add("Delete", () => Delete("Project"))
                 .Add("Update", () => Update("Project"))
                 .Add("Exit", ConsoleMenu.Close);
-
+            var statSubMenu = new ConsoleMenu(args, level: 1)
+               .Add("Employee Count on Project", () => GetEmployeeCountOnProject())
+               .Add("Departments Involved in Project", () => GetDepartmentsInvolvedInProject())
+               .Add("Longest Serving Employee Details", () => GetLongestServingEmployeeDetails())
+               .Add("Department Work Hours Statistics", () => DepartmentWorkHoursStatistics())
+               .Add("Department of Employee", () => GetDepartmentOfEmployee())
+               .Add("Exit", ConsoleMenu.Close);
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Employee", () => employeeSubMenu.Show())
                 .Add("Department", () => departmentSubMenu.Show())
                 .Add("ProjectAssignment", () => projectassignSubMenu.Show())
                 .Add("Project", () => projectSubMenu.Show())
+                .Add("Statistics", () => statSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

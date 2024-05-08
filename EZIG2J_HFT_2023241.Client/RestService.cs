@@ -63,6 +63,7 @@ namespace EZIG2J_HFT_2023241.Client
             if (response.IsSuccessStatusCode)
             {
                 items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+              
             }
             else
             {
@@ -146,6 +147,7 @@ namespace EZIG2J_HFT_2023241.Client
         }
 
     }
+
     public class RestExceptionInfo
     {
         public RestExceptionInfo()

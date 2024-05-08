@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using static EZIG2J_HFT_2023241.Logic.EmployeeLogic;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace EZIG2J_HFT_2023241.Endpoint.Controllers
 {
@@ -24,16 +24,7 @@ namespace EZIG2J_HFT_2023241.Endpoint.Controllers
         {
             return this.logic.GetEmployeeCountOnProject(projectId);
         }
-        /*  public string GetLongestServingEmployeeDetails()
-        {
-            var longestServingEmployee = repo.ReadAll().OrderBy(e => e.HireDate).FirstOrDefault();
-            if (longestServingEmployee != null)
-            {
-                return $"{longestServingEmployee.Name} - {longestServingEmployee.Department.Name}";
-            }
-            throw new Exception("Nincs alkalmazott az adatbázisban.");
-        }
-         */
+       
         [HttpGet]
         public List<string> GetDepartmentsInvolvedInProject(int projectId)
         {
