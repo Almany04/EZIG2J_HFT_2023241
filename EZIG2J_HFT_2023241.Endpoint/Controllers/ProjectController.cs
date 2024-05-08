@@ -1,56 +1,43 @@
-﻿using EZIG2J_HFT_2023241.Logic;
-using EZIG2J_HFT_2023241.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EZIG2J_HFT_2023241.Endpoint.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
-
-        IProjectLogic logic;
-
-        public ProjectController(IProjectLogic logic)
-        {
-            this.logic = logic;
-        }
-
-
+        // GET: api/<ProjectController>
         [HttpGet]
-        public IEnumerable<Project> ReadAll()
+        public IEnumerable<string> Get()
         {
-            return this.logic.ReadAll();
+            return new string[] { "value1", "value2" };
         }
 
-
+        // GET api/<ProjectController>/5
         [HttpGet("{id}")]
-        public Project Read(int id)
+        public string Get(int id)
         {
-            return this.logic.Read(id);
+            return "value";
         }
 
-
+        // POST api/<ProjectController>
         [HttpPost]
-        public void Create([FromBody] Project value)
+        public void Post([FromBody] string value)
         {
-            this.logic.Create(value);
         }
 
-
-        [HttpPut]
-        public void Update([FromBody] Project value)
+        // PUT api/<ProjectController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-            this.logic.Update(value);
         }
 
-
+        // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
         }
     }
 }
