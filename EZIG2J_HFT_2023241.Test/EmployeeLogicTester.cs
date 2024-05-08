@@ -237,6 +237,29 @@ namespace EZIG2J_HFT_2023241.Test
             // Assert
             mockEmployeeRepo.Verify(r => r.Create(employee), Times.Never);
         }
+        [Test]
+        public void ReadEmployeeTestWithExistingId()
+        {
+            // Arrange
+            var employee = new Employee() { EmployeeId = 1, Name = "John Doe" };
+            mockEmployeeRepo.Setup(e => e.Read(1)).Returns(employee);
+
+            // Act
+            var result = logic.Read(1);
+
+            // Assert
+            Assert.AreEqual(employee, result);
+        }
+
+        [Test]
+        public void ReadEmployeeTestWithNonExistingId()
+        {
+            // Arrange
+            mockEmployeeRepo.Setup(e => e.Read(999)).Returns<Employee>(null);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => logic.Read(999));
+        }
 
     }
 }
