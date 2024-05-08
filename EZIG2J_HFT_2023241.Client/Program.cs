@@ -19,6 +19,11 @@ namespace EZIG2J_HFT_2023241.Client
                 Console.Write("Enter Employee Name: ");
                 string name = Console.ReadLine();
                 rest.Post(new Employee() { Name = name }, "Employee");
+            }else if(entity == "Department")
+            {
+                Console.Write("Enter Department Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Department() { Name = name }, "Department");
             }
         }
         static void List(string entity)
@@ -30,8 +35,15 @@ namespace EZIG2J_HFT_2023241.Client
                 {
                     Console.WriteLine(item.EmployeeId + ": " + item.Name);
                 }
+            } else if (entity == "Department")
+            {
+                List<Department> departments = rest.Get<Department>("Department");
+                foreach (var item in departments)
+                {
+                    Console.WriteLine(item.DepartmentId + ": " + item.Name);
+                }
             }
-            Console.ReadLine();
+                Console.ReadLine();
         }
         static void Update(string entity)
         {
@@ -56,6 +68,7 @@ namespace EZIG2J_HFT_2023241.Client
             }
         }
        
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:39574/", "employee");
