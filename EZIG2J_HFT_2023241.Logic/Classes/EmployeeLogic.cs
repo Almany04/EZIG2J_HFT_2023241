@@ -101,6 +101,23 @@ namespace EZIG2J_HFT_2023241.Logic
         {
             public int DepartmentId { get; set; }
             public double TotalWorkHours { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || GetType() != obj.GetType())
+                {
+                    return false;
+                }
+
+                var other = obj as DepartmentWorkHoursInfo;
+
+                return DepartmentId == other.DepartmentId && TotalWorkHours == other.TotalWorkHours;
+            }
+
+            public override int GetHashCode()
+            {
+                return DepartmentId.GetHashCode() ^ TotalWorkHours.GetHashCode();
+            }
         }
 
         //Az egyes projekteken dolgozók összesített munkaidőtartama
