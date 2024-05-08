@@ -75,7 +75,6 @@ namespace EZIG2J_HFT_2023241.Logic
         }
 
 
-        //A legrégebben dolgozó alkalmazott neve és munkaköre
         public string GetLongestServingEmployeeDetails()
         {
             var longestServingEmployee = repo.ReadAll().OrderBy(e => e.HireDate).FirstOrDefault();
@@ -83,7 +82,7 @@ namespace EZIG2J_HFT_2023241.Logic
             {
                 return $"{longestServingEmployee.Name} - {longestServingEmployee.Department.Name}";
             }
-            return "Nincs alkalmazott az adatbázisban.";
+            throw new Exception("Nincs alkalmazott az adatbázisban.");
         }
         //Dolgozók munkaidőtartamának összesítésére osztályonként
         public IEnumerable<DepartmentWorkHoursInfo> DepartmentWorkHoursStatistics()
@@ -129,7 +128,7 @@ namespace EZIG2J_HFT_2023241.Logic
 
             foreach (var project in projects)
             {
-                var totalWorkHours = project.Select(pa => (pa.Project.EndDate - pa.Project.StartDate).TotalHours).Sum();
+                var totalWorkHours = (project.First().Project.EndDate - project.First().Project.StartDate).TotalHours;
                 result.Add(project.First().Project.Title, totalWorkHours);
             }
 

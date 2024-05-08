@@ -31,6 +31,78 @@ namespace EZIG2J_HFT_2023241.Test
         }
 
         [Test]
+        public void GetEmployeeCountOnProjectTest()
+        {
+            // Arrange
+            var employees = new List<Employee>
+            {
+                new Employee
+                {
+                    EmployeeId = 1,
+                    ProjectAssignments = new List<ProjectAssignment>
+                    {
+                        new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } }
+                    }
+                },
+                new Employee
+                {
+                    EmployeeId = 2,
+                    ProjectAssignments = new List<ProjectAssignment>
+                    {
+                        new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } },
+                        new ProjectAssignment { ProjectId = 2, Project = new Project { ProjectId = 2, Title = "Project2", StartDate = DateTime.Parse("2024-02-01"), EndDate = DateTime.Parse("2024-02-15") } }
+                    }
+                }
+            };
+
+            mockEmployeeRepo.Setup(e => e.ReadAll()).Returns(employees.AsQueryable());
+
+            // Act
+            var count = logic.GetEmployeeCountOnProject(1);
+
+            // Assert
+            Assert.AreEqual(2, count); // We expect 2 employees on Project1
+        }
+
+        [Test]
+        public void GetDepartmentsInvolvedInProjectTest()
+        {
+            // Arrange
+            var employees = new List<Employee>
+    {
+        new Employee
+        {
+            EmployeeId = 1,
+            Department = new Department { DepartmentId = 1, Name = "Department1" },
+            ProjectAssignments = new List<ProjectAssignment>
+            {
+                new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } }
+            }
+        },
+        new Employee
+        {
+            EmployeeId = 2,
+            Department = new Department { DepartmentId = 2, Name = "Department2" },
+            ProjectAssignments = new List<ProjectAssignment>
+            {
+                new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } },
+                new ProjectAssignment { ProjectId = 2, Project = new Project { ProjectId = 2, Title = "Project2", StartDate = DateTime.Parse("2024-02-01"), EndDate = DateTime.Parse("2024-02-15") } }
+            }
+        }
+    };
+
+            mockEmployeeRepo.Setup(e => e.ReadAll()).Returns(employees.AsQueryable());
+
+            // Act
+            var departments = logic.GetDepartmentsInvolvedInProject(1);
+
+            // Assert
+            Assert.AreEqual(2, departments.Count); // We expect 2 departments involved in Project1
+            Assert.Contains("Department1", departments);
+            Assert.Contains("Department2", departments);
+        }
+
+        [Test]
         public void DepartmentWorkHoursStatisticsTest()
         {
             // Act
@@ -51,8 +123,43 @@ namespace EZIG2J_HFT_2023241.Test
             Assert.AreEqual(expected1, actual1.TotalWorkHours, 0.00001);
             Assert.AreEqual(expected2, actual2.TotalWorkHours, 0.00001);
         }
-    }
+        [Test]
+        public void GetTotalWorkHoursPerProjectTest()
+        {
+            // Arrange
+            var employees = new List<Employee>
+    {
+        new Employee
+        {
+            EmployeeId = 1,
+            ProjectAssignments = new List<ProjectAssignment>
+            {
+                new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } }
+            }
+        },
+        new Employee
+        {
+            EmployeeId = 2,
+            ProjectAssignments = new List<ProjectAssignment>
+            {
+                new ProjectAssignment { ProjectId = 1, Project = new Project { ProjectId = 1, Title = "Project1", StartDate = DateTime.Parse("2024-01-01"), EndDate = DateTime.Parse("2024-01-10") } },
+                new ProjectAssignment { ProjectId = 2, Project = new Project { ProjectId = 2, Title = "Project2", StartDate = DateTime.Parse("2024-02-01"), EndDate = DateTime.Parse("2024-02-15") } }
+            }
+        }
+    };
 
+            mockEmployeeRepo.Setup(e => e.ReadAll()).Returns(employees.AsQueryable());
+
+            // Act
+            var result = logic.GetTotalWorkHoursPerProject();
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(216, result["Project1"]); // 9 days * 24 hours = 216 hours
+            Assert.AreEqual(336, result["Project2"]); // 14 days * 24 hours = 336 hours
+        }
+
+    }
 }
 
 
