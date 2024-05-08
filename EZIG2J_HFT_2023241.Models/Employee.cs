@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace EZIG2J_HFT_2023241.Models
 {
@@ -18,9 +19,9 @@ namespace EZIG2J_HFT_2023241.Models
         public DateTime HireDate { get; set; }
 
         public int DepartmentId { get; set; }
-
+        [JsonIgnore]
         public virtual Department Department { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<ProjectAssignment> ProjectAssignments { get; set; }
 
         public Employee()

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace EZIG2J_HFT_2023241.Models
 {
@@ -17,9 +18,9 @@ namespace EZIG2J_HFT_2023241.Models
         public int EmployeeId { get; set; }
 
         public int ProjectId { get; set; }
-
+        [JsonIgnore]
         public virtual Employee Employee { get; set; }
-
+        [JsonIgnore]
         public virtual Project Project { get; set; }
 
         public ProjectAssignment()
