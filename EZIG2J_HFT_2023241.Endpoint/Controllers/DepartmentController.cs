@@ -1,43 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using EZIG2J_HFT_2023241.Logic;
+using EZIG2J_HFT_2023241.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace EZIG2J_HFT_2023241.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        // GET: api/<DepartmentController>
+
+        IDepartmentLogic logic;
+
+        public DepartmentController(IDepartmentLogic logic)
+        {
+            this.logic = logic;
+        }
+
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Department> ReadAll()
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.ReadAll();
         }
 
-        // GET api/<DepartmentController>/5
+
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Department Read(int id)
         {
-            return "value";
+            return this.logic.Read(id);
         }
 
-        // POST api/<DepartmentController>
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] Department value)
         {
+            this.logic.Create(value);
         }
 
-        // PUT api/<DepartmentController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut]
+        public void Update([FromBody] Department value)
         {
+            this.logic.Update(value);
         }
 
-        // DELETE api/<DepartmentController>/5
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.logic.Delete(id);
         }
+
     }
 }
