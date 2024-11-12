@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{4BE10A
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZIG2J_HFT_2023241.Endpoint", "EZIG2J_HFT_2023241.Endpoint\EZIG2J_HFT_2023241.Endpoint.csproj", "{B9440244-616E-4AF4-A675-0CFD3ECDB801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EZIG2J_HFT_2023241.Endpoint", "EZIG2J_HFT_2023241.Endpoint\EZIG2J_HFT_2023241.Endpoint.csproj", "{B9440244-616E-4AF4-A675-0CFD3ECDB801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZIG2J_HFT_2023241.WpfClient", "EZIG2J_HFT_2023241.WpfClient\EZIG2J_HFT_2023241.WpfClient.csproj", "{EEF0BE5C-5D63-4E01-A180-22384EAEFDE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{B9440244-616E-4AF4-A675-0CFD3ECDB801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9440244-616E-4AF4-A675-0CFD3ECDB801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9440244-616E-4AF4-A675-0CFD3ECDB801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF0BE5C-5D63-4E01-A180-22384EAEFDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF0BE5C-5D63-4E01-A180-22384EAEFDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF0BE5C-5D63-4E01-A180-22384EAEFDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF0BE5C-5D63-4E01-A180-22384EAEFDE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
