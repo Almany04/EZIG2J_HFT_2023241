@@ -12,7 +12,6 @@ namespace EZIG2J_HFT_2023241.WpfClient
     {
         public RelayCommand NavigateToEmployeesCommand { get; set; }
         public RelayCommand NavigateToProjectsCommand { get; set; }
-        public RelayCommand NavigateToProjectAssignmentsCommand { get; set; }
         public RelayCommand NavigateToDepartmentsCommand { get; set; }
 
         public StartWindowViewModel()
@@ -25,17 +24,16 @@ namespace EZIG2J_HFT_2023241.WpfClient
 
             NavigateToProjectsCommand = new RelayCommand(() =>
             {
-                MessageBox.Show("Projects window will be implemented later.");
+                var window2 = new Window1();
+                window2.Show();
             });
 
-            NavigateToProjectAssignmentsCommand = new RelayCommand(() =>
-            {
-                MessageBox.Show("Project Assignments window will be implemented later.");
-            });
+          
 
             NavigateToDepartmentsCommand = new RelayCommand(() =>
             {
-                MessageBox.Show("Departments window will be implemented later.");
+                var window3 = new Departments(); 
+                window3.Show();
             });
         }
     }
