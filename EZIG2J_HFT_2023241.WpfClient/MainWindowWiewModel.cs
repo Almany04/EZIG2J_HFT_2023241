@@ -63,7 +63,7 @@ namespace EZIG2J_HFT_2023241.WpfClient
         {
             if (!IsInDesignMode)
             {
-                employees = new RestCollection<Employee>("http://localhost:39574/", "employee");
+                employees = new RestCollection<Employee>("http://localhost:39574/", "employee", "hub");
                 CreateEmployeeCommand = new RelayCommand(() =>
                 {
                     employees.Add(new Employee()

@@ -1,3 +1,4 @@
+using EZIG2J_HFT_2023241.Endpoint.Services;
 using EZIG2J_HFT_2023241.Logic;
 using EZIG2J_HFT_2023241.Models;
 using EZIG2J_HFT_2023241.Repository;
@@ -42,6 +43,7 @@ namespace EZIG2J_HFT_2023241.Endpoint
             services.AddTransient<IProjectAssignmentLogic, ProjectAssignmentLogic>();
             services.AddTransient<IProjectLogic, ProjectLogic>();
 
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -73,6 +75,7 @@ namespace EZIG2J_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
