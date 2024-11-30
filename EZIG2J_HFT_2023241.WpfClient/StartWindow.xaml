@@ -1,0 +1,17 @@
+﻿<Window x:Class="EZIG2J_HFT_2023241.WpfClient.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EZIG2J_HFT_2023241.WpfClient"
+        mc:Ignorable="d"
+         Title="Start Window" Height="300" Width="500">
+    <Grid>
+        <StackPanel>
+            <Button Content="Employees" Margin="10" Padding="10" Command="{Binding NavigateToEmployeesCommand}" />
+            <Button Content="Projects" Margin="10" Padding="10" Command="{Binding NavigateToProjectsCommand}" />
+            <Button Content="Project Assignments" Margin="10" Padding="10" Command="{Binding NavigateToProjectAssignmentsCommand}" />
+            <Button Content="Departments" Margin="10" Padding="10" Command="{Binding NavigateToDepartmentsCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>
