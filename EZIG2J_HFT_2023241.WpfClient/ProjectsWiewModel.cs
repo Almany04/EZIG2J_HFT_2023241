@@ -63,7 +63,7 @@ namespace EZIG2J_HFT_2023241.WpfClient
         {
             if (!IsInDesignMode)
             {
-                projects = new RestCollection<Project>("http://localhost:39574/", "projects", "hub");
+                projects = new RestCollection<Project>("http://localhost:39574/", "projects");
                 CreateProjectCommand = new RelayCommand(() =>
                 {
                     projects.Add(new Project()
